@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import './LoginScreen.css'
 import useFetch from '../../hooks/useFetch.jsx'
 import useForm from '../../hooks/useForm.jsx'
 import {login} from '../../services/authService.js'
@@ -57,43 +58,42 @@ export const LoginScreen = () => {
     )
 
     return (
-        <div>
-            <h1>Iniciar Sesión</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor={FORM_FIELDS.EMAIL}>Email:</label>
+        <div className="login-wrapper">
+            <div className="login-card">
+                <h1>Iniciar Sesión</h1>
+
+                <form className="login-form" onSubmit={handleSubmit}>
                     <input
                         name={FORM_FIELDS.EMAIL}
-                        id={FORM_FIELDS.EMAIL}
-                        type='email'
+                        type="email"
+                        placeholder="Enter your email"
                         onChange={handleInputChange}
+                        value={login_form_state[FORM_FIELDS.EMAIL]}
                     />
-                </div>
-                <div>
-                    <label htmlFor={FORM_FIELDS.PASSWORD}>Contraseña:</label>
+
                     <input
                         name={FORM_FIELDS.PASSWORD}
-                        id={FORM_FIELDS.PASSWORD}
-                        type='password'
+                        type="password"
+                        placeholder="Enter your password"
                         onChange={handleInputChange}
+                        value={login_form_state[FORM_FIELDS.PASSWORD]}
                     />
-                </div>
-                {
-                    !response
-                        ?
-                        <button type='submit' disabled={loading}>
-                            {loading ? 'Iniciando sesión...' : 'Iniciar Sesión'}
-                        </button>
-                        :
-                        <>
-                            <button type='submit' disabled={true}>Sesión Iniciada</button>
-                            <span style={{ color: 'green' }}>{response.message}</span>
-                        </>
-                }
-                {
-                    error && <span style={{ color: 'red' }}>{error.message}</span>
-                }
-            </form>
+
+                    <button type="submit" className="btn-primary" disabled={loading}>
+                        {loading ? 'Ingresando...' : 'Log in'}
+                    </button>
+
+                    {error && <div className="msg error">{error.message}</div>}
+                    {response && <div className="msg success">{response.message}</div>}
+
+                    <div className="login-links">
+                      <a href="/register">Create Account</a>
+                      <div><a href="/forgot">Forgot Password?</a></div>
+                    </div>
+                </form>
+            </div>
         </div>
     )
 }
+
+export default LoginScreen

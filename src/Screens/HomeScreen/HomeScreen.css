@@ -1,0 +1,432 @@
+:root {
+    --primary: #4a90e2;
+    --primary-dark: #357abd;
+    --primary-light: #6ba3e8;
+    --background: #f5f7fa;
+    --card-background: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --text-light: #bdc3c7;
+    --border: #e1e8ed;
+    --success: #27ae60;
+    --danger: #e74c3c;
+    --danger-hover: #c0392b;
+    --shadow: rgba(0, 0, 0, 0.08);
+    --shadow-hover: rgba(0, 0, 0, 0.12);
+}
+
+/* Estilos específicos para HomeScreen */
+
+.App {
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: transparent; /* Mantener el texto transparente para el efecto */
+    text-align: center;
+    margin-bottom: 80px; /* Aumentado de 40px a 60px */
+    background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%); /* Degradado claro */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+#userInput {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 30px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: var(--card-background);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px var(--shadow);
+    padding: 4px;
+    transition: box-shadow 0.3s ease;
+}
+
+#userInput:focus-within {
+    box-shadow: 0 4px 16px var(--shadow-hover);
+}
+
+#userInput input {
+    width: 100%;
+    background: transparent;
+    color: var(--text-primary);
+    border: none;
+    font-size: 1rem;
+    padding: 16px 20px;
+    padding-right: 60px;
+    border-radius: 12px;
+    outline: none;
+    font-weight: 400;
+}
+
+#userInput input::placeholder {
+    color: var(--text-light);
+    font-weight: 400;
+}
+
+#addBtn {
+    position: absolute;
+    right: 8px;
+    font-size: 1.5rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 300;
+    box-shadow: 0 2px 8px rgba(74, 144, 226, 0.3);
+}
+
+#addBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+    background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+}
+
+#addBtn:active {
+    transform: translateY(0);
+}
+
+.list-container {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 30px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    background: var(--card-background);
+    border-radius: 12px;
+    box-shadow: 0 2px 8px var(--shadow);
+}
+
+.task-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: var(--card-background);
+    box-shadow: 0 1px 3px var(--shadow);
+    transition: background 0.12s ease, box-shadow 0.12s ease, transform 0.12s ease;
+}
+
+.task-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(180deg, var(--primary) 0%, var(--primary-light) 100%);
+    transition: width 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 0;
+    border-radius: 16px 0 0 16px;
+}
+
+.task-container:hover::before {
+    width: 5px;
+}
+
+.task-container.completed::before {
+    background: linear-gradient(180deg, var(--success) 0%, #2ecc71 100%);
+}
+
+/* Alinea checkbox y texto en una sola línea */
+.task-container label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Evita que el texto salte a vertical, y trunca si es muy largo */
+.task-container label span {
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: var(--text-primary);
+}
+
+/* Checkbox tamaño y estilo sencillo */
+.task-container input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin: 0;
+    flex: 0 0 auto;
+    accent-color: var(--primary);
+}
+
+/* Botón eliminar: efecto sutil y sin transformaciones exageradas */
+.closeBtn {
+    background: transparent;
+    border: none;
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    color: var(--danger);
+    cursor: pointer;
+    transition: background-color 0.12s ease, color 0.12s ease;
+    padding: 4px;
+    box-shadow: none;
+}
+
+.closeBtn:hover {
+    background: rgba(231, 76, 60, 0.06);
+    color: var(--danger-hover);
+}
+
+.closeBtn:active {
+    background: rgba(231, 76, 60, 0.10);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-15px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.task-container:hover {
+    box-shadow: 0 10px 25px var(--shadow-hover), 0 4px 10px rgba(0, 0, 0, 0.08);
+    transform: translateY(-3px) scale(1.01);
+    border-color: var(--primary-lightest);
+    background: linear-gradient(to right, rgba(74, 144, 226, 0.02) 0%, var(--card-background) 4%);
+}
+
+.task-container label {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex: 1;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+    z-index: 1;
+    transition: all 0.2s ease;
+}
+
+.task-container:hover label {
+    transform: translateX(2px);
+}
+
+/* Checkbox personalizado moderno */
+.task-container input[type="checkbox"] {
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    min-width: 24px;
+    border: 2.5px solid var(--border);
+    border-radius: 8px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--card-background);
+    flex-shrink: 0;
+}
+
+.task-container input[type="checkbox"]:hover {
+    border-color: var(--primary);
+    transform: scale(1.1);
+    box-shadow: 0 0 0 4px rgba(74, 144, 226, 0.1);
+}
+
+.task-container input[type="checkbox"]:checked {
+    background: linear-gradient(135deg, var(--card-background) 0%, var(--card-background) 100%); /* Quitar el efecto verde */
+    border-color: var(--border); /* Mantener el borde normal */
+    box-shadow: none; /* Quitar la sombra */
+}
+
+.task-container input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.task-container input[type="checkbox"]:checked:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(74, 144, 226, 0.4);
+}
+
+.task-container label span {
+    line-height: 1.5;
+    transition: all 0.2s ease;
+    word-break: break-word;
+    font-size: 1.05rem; /* aumentado ligeramente */
+}
+
+.task-container.completed {
+    background: linear-gradient(to right, rgba(39, 174, 96, 0.03) 0%, var(--card-background) 4%);
+    opacity: 0.85;
+}
+
+.task-container.completed label span {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+    font-weight: 400;
+    font-size: 1.1rem; /* Aumentado el tamaño de la fuente */
+}
+
+.task-container.completed:hover {
+    opacity: 1;
+    background: linear-gradient(to right, rgba(39, 174, 96, 0.06) 0%, var(--card-background) 4%);
+}
+
+.task-container.completed:hover::before {
+    width: 5px;
+}
+
+.task-container.completed input[type="checkbox"]:checked {
+    background: linear-gradient(135deg, var(--success) 0%, #2ecc71 100%);
+    border-color: var(--success);
+    box-shadow: 0 2px 8px rgba(39, 174, 96, 0.3);
+}
+
+.closeBtn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    opacity: 0.4;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+    padding: 8px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    position: relative;
+    z-index: 1;
+    margin-left: 8px;
+}
+
+.closeBtn:hover {
+    opacity: 1;
+    background: var(--danger-light);
+    transform: scale(1.15) rotate(90deg);
+    color: var(--danger);
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.2);
+}
+
+.closeBtn:active {
+    transform: scale(1) rotate(90deg);
+}
+
+.closeBtn svg {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2.5;
+    transition: all 0.2s ease;
+}
+
+.stats {
+    margin-top: 20px;
+    padding: 20px;
+    background: var(--card-background);
+    border-radius: 12px;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    text-align: center;
+    box-shadow: 0 2px 8px var(--shadow);
+    width: 100%;
+    font-weight: 500;
+}
+
+.stats span {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* Responsive design */
+@media (max-width: 480px) {
+    .App {
+        padding: 20px 16px;
+    }
+
+    h1 {
+        font-size: 2rem;
+        margin-bottom: 30px;
+    }
+
+    .task-container {
+        padding: 16px 18px;
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+        border-radius: 14px;
+    }
+
+    .task-container::before {
+        width: 3px;
+    }
+
+    .task-container:hover::before {
+        width: 4px;
+    }
+
+    .task-container input[type="checkbox"] {
+        width: 22px;
+        height: 22px;
+        min-width: 22px;
+    }
+
+    .task-container label {
+        gap: 14px;
+    }
+
+    #userInput input {
+        padding: 14px 18px;
+        padding-right: 55px;
+        font-size: 0.95rem;
+    }
+
+    #addBtn {
+        width: 40px;
+        height: 40px;
+        font-size: 1.3rem;
+    }
+
+    .closeBtn {
+        padding: 6px;
+    }
+
+    .closeBtn svg {
+        width: 16px;
+        height: 16px;
+    }
+}
