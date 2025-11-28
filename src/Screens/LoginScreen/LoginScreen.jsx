@@ -3,7 +3,7 @@ import './LoginScreen.css'
 import useFetch from '../../hooks/useFetch.jsx'
 import useForm from '../../hooks/useForm.jsx'
 import {login} from '../../services/authService.js'
-import { useNavigate } from 'react-router'
+import { useNavigate, Link } from 'react-router'
 import LOCALSTORAGE_KEYS from '../../constants/localstorage.js'
 
 const FORM_FIELDS = {
@@ -87,8 +87,8 @@ export const LoginScreen = () => {
                     {response && <div className="msg success">{response.message}</div>}
 
                     <div className="login-links">
-                      <a href="/register">Create Account</a>
-                      <div><a href="/forgot">Forgot Password?</a></div>
+                      <Link to="/register">Create Account</Link>
+                      <div><Link to="/forgot">Forgot Password?</Link></div>
                     </div>
                 </form>
             </div>
