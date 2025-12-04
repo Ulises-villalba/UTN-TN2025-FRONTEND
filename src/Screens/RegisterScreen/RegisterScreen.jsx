@@ -45,7 +45,7 @@ console.log(error);
         }
     )
 
-
+ console.log("VITE_API_URL:", import.meta.env.VITE_API_URL);
     console.log(loading)
     return (
         <div id="register-wrapper">
